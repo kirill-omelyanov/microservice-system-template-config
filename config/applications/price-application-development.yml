@@ -2,7 +2,7 @@ server:
   port: 8080
 
 price:
-  slogan: "Take three hippo for the price of one!!!"
+  slogan: "Take two hippo for the price of one!!!"
   discount: 50
 
 management:
