@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+price:
+  slogan: "Take three hippo for the price of one!!!"
+  discount: 50
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

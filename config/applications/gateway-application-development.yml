@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: rent
+          uri: lb://rent-image
+          predicates:
+            - Path=/api/rent/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@customKeyResolver}'
+                redis-rate-limiter.replenishRate: 40
+                redis-rate-limiter.burstCapacity: 80
+            - RewritePath=/api/(?<rent>.*), /$\{rent}
+            - AddResponseHeader=X-Some-Header, gateway-header
+
+        - id: price
+          uri: lb://price-image
+          predicates:
+            - Path=/api/price/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@customKeyResolver}'
+                redis-rate-limiter.replenishRate: 40
+                redis-rate-limiter.burstCapacity: 80
+            - RewritePath=/api/(?<price>.*), /$\{price}
+
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
