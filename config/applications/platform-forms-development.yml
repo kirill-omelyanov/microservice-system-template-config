@@ -16,3 +16,9 @@ spring:
       schema: "public"
       minimum-idle: 8
       maximum-pool-size: 80
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
