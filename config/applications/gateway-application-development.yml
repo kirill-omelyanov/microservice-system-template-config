@@ -29,12 +29,21 @@ spring:
                 redis-rate-limiter.replenishRate: 40
                 redis-rate-limiter.burstCapacity: 80
             - RewritePath=/api/(?<price>.*), /$\{price}
+
         - id: audit
           uri: lb://audit-image
           predicates:
             - Path=/api/audit/**
           filters:
             - RewritePath=/api/(?<audit>.*), /$\{audit}    
+
+        - id: forms
+          uri: lb://platform-forms-image
+          predicates:
+            - Path=/api/forms/**
+          filters:
+            - RewritePath=/api/forms/(?<path>.*), /$\{path}
+
 
 ribbon:
   ConnectTimeout: 3000
