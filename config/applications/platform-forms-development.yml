@@ -17,6 +17,7 @@ spring:
       minimum-idle: 8
       maximum-pool-size: 80
   jpa:
+    show-sql: true
     properties:
       hibernate:
         jdbc:
