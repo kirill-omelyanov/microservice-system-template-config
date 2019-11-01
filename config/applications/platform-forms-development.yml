@@ -14,8 +14,8 @@ spring:
     password: postgres
     hikari:
       schema: "public"
-      minimum-idle: 8
-      maximum-pool-size: 80
+      minimum-idle: 2
+      maximum-pool-size: 10
   jpa:
     show-sql: true
     properties:
