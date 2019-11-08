@@ -42,7 +42,7 @@ spring:
           predicates:
             - Path=/api/v1/forms/**
           filters:
-            - RewritePath=/api/v1/forms/(?<path>.*), /v1/forms/$\{path}
+            - RewritePath=/api/(?<path>.*), /$\{path}
 
 
 ribbon:
