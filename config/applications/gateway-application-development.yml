@@ -40,9 +40,9 @@ spring:
         - id: forms
           uri: lb://platform-forms-image
           predicates:
-            - Path=/api/{api_version}/forms/**
+            - Path=/api/{version}/forms/**
           filters:
-            - RewritePath=/api/{api_version}/forms/(?<path>.*), /{api_version}/forms/$\{path}
+            - RewritePath=/api/(?<version>.*)/forms/(?<path>.*), /$\{version}/forms/$\{path}
 
 
 ribbon:
