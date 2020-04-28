@@ -7,6 +7,8 @@ spring:
     discovery-client-enabled: true
     sender:
       type: web
+  rabbitmq:
+    host: rabbitmq
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://188.127.226.180:15432/mdm-form
@@ -30,3 +32,7 @@ feign:
         connectTimeout: 2000
         readTimeout: 2000
         loggerLevel: full
+task:
+  concurrency:
+    import_queue: 3
+    export_queue: 3
