@@ -43,6 +43,7 @@ spring:
             - Path=/api/{version}/forms/**
           filters:
             - RewritePath=/api/(?<path>.*), /$\{path}
+            - RewritePath=/api/(?<version>.*)/forms/tasks(?<path>.*), /$\{version}/tasks/$\{path}
 
 
 ribbon:
