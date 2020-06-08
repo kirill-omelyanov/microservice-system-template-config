@@ -29,7 +29,7 @@ feign:
   client:
     config:
       default:
-        connectTimeout: 2000
+        connectTimeout: 1000
         readTimeout: 2000
         loggerLevel: full
 task:
