@@ -1,4 +1,8 @@
 spring:
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
   sleuth:
     sampler:
       probability: 1.0
@@ -25,13 +29,7 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
-feign:
-  client:
-    config:
-      default:
-        connectTimeout: 1000
-        readTimeout: 2000
-        loggerLevel: full
+
 task:
   concurrency:
     import_queue: 3
