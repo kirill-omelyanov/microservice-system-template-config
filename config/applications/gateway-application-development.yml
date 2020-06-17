@@ -38,11 +38,18 @@ spring:
             - RewritePath=/api/(?<audit>.*), /$\{audit}    
 
         - id: forms
-          uri: lb://platform-forms-image
+          uri: lb://platform-forms
           predicates:
             - Path=/api/{version}/forms/**
           filters:
             - RewritePath=/api/(?<version>.*)/forms/tasks/(?<path>.*), /$\{version}/tasks/$\{path}
+            - RewritePath=/api/(?<path>.*), /$\{path}
+
+        - id: tree
+          uri: lb://platform-tree
+          predicates:
+            - Path=/api/{version}/tree/**
+          filters:
             - RewritePath=/api/(?<path>.*), /$\{path}
             
 
