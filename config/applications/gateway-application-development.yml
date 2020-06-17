@@ -2,8 +2,29 @@ server:
   port: 8080
 
 spring:
+  redis:
+    host: redis
+    port: 6379
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type: reactive
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://zipkin-9411/
+    discovery-client-enabled: true
+    sender:
+      type: web
   cloud:
     gateway:
+      security:
+        enabled: false
+      plugin:
+        config:
+          log-request: false
+          read-request-data: true
+          read-response-data: false
       routes:
         - id: rent
           uri: lb://rent-image
