@@ -19,7 +19,7 @@ spring:
   cloud:
     loadbalancer:
       ribbon:
-        enabled: false
+        enabled: true
     gateway:
       security:
         enabled: false
