@@ -81,3 +81,7 @@ spring:
 ribbon:
   ConnectTimeout: 3000
   ReadTimeout: 60000
+
+jwt:
+  serviceIds:
+    gateway-application: "bb743523-f390-4a08-834e-9d1c592ccec4"
