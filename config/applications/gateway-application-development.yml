@@ -17,9 +17,6 @@ spring:
     sender:
       type: web
   cloud:
-    loadbalancer:
-      ribbon:
-        enabled: true
     gateway:
       security:
         enabled: false
