@@ -1,18 +1,4 @@
 spring:
-  cloud:
-    loadbalancer:
-      ribbon:
-        enabled: true
-  sleuth:
-    sampler:
-      probability: 1.0
-  zipkin:
-    base-url: http://zipkin-9411/
-    discovery-client-enabled: true
-    sender:
-      type: web
-  rabbitmq:
-    host: rabbitmq
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://188.127.226.180:15432/mdm-form
@@ -22,13 +8,6 @@ spring:
       schema: "public"
       minimum-idle: 2
       maximum-pool-size: 10
-  jpa:
-    show-sql: true
-    properties:
-      hibernate:
-        jdbc:
-          lob:
-            non_contextual_creation: true
 
 task:
   concurrency:

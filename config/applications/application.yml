@@ -1,0 +1,35 @@
+spring:
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: true
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://zipkin-9411/
+    discovery-client-enabled: true
+    sender:
+      type: web
+  redis:
+    host: redis
+    port: 6379
+  rabbitmq:
+    host: rabbitmq
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+jwt:
+  serviceIds:
+    gateway-application: "bb743523-f390-4a08-834e-9d1c592ccec4"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

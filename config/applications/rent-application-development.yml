@@ -9,14 +9,6 @@ feign:
         readTimeout: 2000
         loggerLevel: full
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    health:
-      show-details: always
 
 resilience4j.circuitbreaker:
   configs:

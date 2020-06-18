@@ -5,11 +5,3 @@ price:
   slogan: "Take two hippo for the price of one!!!"
   discount: 50
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    health:
-      show-details: always
