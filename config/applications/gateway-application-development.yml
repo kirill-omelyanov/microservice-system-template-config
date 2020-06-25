@@ -50,8 +50,7 @@ spring:
         - id: forms
           uri: lb://platform-forms
           predicates:
-            - Path=/api/forms/**
-            - Path=/api/{version}/forms/**
+            - Path=/api/{version}/forms/**, /api/forms/**
           filters:
             - RewritePath=/api/forms/actuator/(?<path>.*), /actuator/$\{path}
             - RewritePath=/api/(?<version>.*)/forms/tasks/(?<path>.*), /$\{version}/tasks/$\{path}
