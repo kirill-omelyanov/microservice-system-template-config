@@ -7,8 +7,6 @@ spring:
     web-application-type: reactive
   cloud:
     gateway:
-      security:
-        enabled: false
       plugin:
         config:
           log-request: false
@@ -68,6 +66,19 @@ spring:
 ribbon:
   ConnectTimeout: 3000
   ReadTimeout: 60000
+
+gateway:
+  security:
+    enabled: false
+  services:
+    - platform-file
+    - platform-forms
+    - platform-gateway
+    - platform-identity
+    - platform-math
+    - platform-mdm
+    - platform-tree
+    - platform-validation
 
 jwt:
   serviceIds:
