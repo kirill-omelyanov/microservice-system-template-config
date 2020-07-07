@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://188.127.226.180:15432/mdm-tree
+    url: jdbc:postgresql://188.127.226.180:15432/mdm-tree?ApplicationName=local-tree-omelyanov
     username: postgres
     password: AceTate1221!
     hikari:
