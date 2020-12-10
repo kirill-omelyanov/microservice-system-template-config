@@ -13,21 +13,8 @@ spring:
           read-request-data: true
           read-response-data: false
       routes:
-        - id: rent
-          uri: lb://rent-image
-          predicates:
-            - Path=/api/rent/**
-          filters:
-            - name: RequestRateLimiter
-              args:
-                key-resolver: '#{@customKeyResolver}'
-                redis-rate-limiter.replenishRate: 40
-                redis-rate-limiter.burstCapacity: 80
-            - RewritePath=/api/(?<rent>.*), /$\{rent}
-            - AddResponseHeader=X-Some-Header, gateway-header
-
         - id: price
-          uri: lb://price-image
+          uri: lb://price-service
           predicates:
             - Path=/api/price/**
           filters:
@@ -35,15 +22,35 @@ spring:
               args:
                 key-resolver: '#{@customKeyResolver}'
                 redis-rate-limiter.replenishRate: 40
-                redis-rate-limiter.burstCapacity: 80
+                redis-rate-limiter.burstCapacity: 100
             - RewritePath=/api/(?<price>.*), /$\{price}
 
-        - id: audit
-          uri: lb://audit-image
+        - id: tree
+          uri: lb://platform-tree
           predicates:
-            - Path=/api/audit/**
+            - Path=/api/{version}/tree/**, /api/tree/**
           filters:
-            - RewritePath=/api/(?<audit>.*), /$\{audit}    
+            - RewritePath=/api/tree/actuator/(?<path>.*), /actuator/$\{path}
+            - RewritePath=/api/(?<version>.*)/tree/abac/(?<path>.*), /$\{version}/abac/$\{path}
+            - RewritePath=/api/(?<path>.*), /$\{path}
+
+        - id: mdm
+          uri: lb://platform-mdm
+          predicates:
+            - Path=/api/{version}/mdm/**, /api/mdm/**
+          filters:
+            - RewritePath=/api/mdm/actuator/(?<path>.*), /actuator/$\{path}
+            - RewritePath=/api/(?<version>.*)/mdm/abac/(?<path>.*), /$\{version}/abac/$\{path}
+            - RewritePath=/api/(?<path>.*), /$\{path}
+
+        - id: math
+          uri: lb://platform-math
+          predicates:
+            - Path=/api/{version}/math/**, /api/math/**
+          filters:
+            - RewritePath=/api/math/actuator/(?<path>.*), /actuator/$\{path}
+            - RewritePath=/api/(?<version>.*)/math/abac/(?<path>.*), /$\{version}/abac/$\{path}
+            - RewritePath=/api/(?<path>.*), /$\{path}
 
         - id: forms
           uri: lb://platform-forms
@@ -51,25 +58,60 @@ spring:
             - Path=/api/{version}/forms/**, /api/forms/**
           filters:
             - RewritePath=/api/forms/actuator/(?<path>.*), /actuator/$\{path}
+            - RewritePath=/api/(?<version>.*)/forms/abac/(?<path>.*), /$\{version}/abac/$\{path}
             - RewritePath=/api/(?<version>.*)/forms/tasks/(?<path>.*), /$\{version}/tasks/$\{path}
             - RewritePath=/api/(?<path>.*), /$\{path}
 
-        - id: tree
-          uri: lb://platform-tree
+        - id: validation
+          uri: lb://platform-validation
           predicates:
-            - Path=/api/{version}/tree/**
+            - Path=/api/{version}/validation/**, /api/validation/**
           filters:
+            - RewritePath=/api/validation/actuator/(?<path>.*), /actuator/$\{path}
+            - RewritePath=/api/(?<version>.*)/validation/abac/(?<path>.*), /$\{version}/abac/$\{path}
             - RewritePath=/api/(?<path>.*), /$\{path}
-            
 
+        - id: identity
+          uri: lb://platform-identity
+          predicates:
+            - Path=/api/{version}/identity/**, /api/identity/**
+          filters:
+            - RewritePath=/api/identity/actuator/(?<path>.*), /actuator/$\{path}
+            - RewritePath=/api/(?<version>.*)/identity/abac/(?<path>.*), /$\{version}/abac/$\{path}
+            - RewritePath=/api/(?<path>.*), /$\{path}
 
-ribbon:
-  ConnectTimeout: 3000
-  ReadTimeout: 60000
+        - id: file
+          uri: lb://platform-file
+          predicates:
+            - Path=/api/{version}/file/**, /api/file/**
+          filters:
+            - RewritePath=/api/file/actuator/(?<path>.*), /actuator/$\{path}
+            - RewritePath=/api/(?<version>.*)/file/abac/(?<path>.*), /$\{version}/abac/$\{path}
+            - RewritePath=/api/(?<path>.*), /$\{path}
+
+        - id: mockserver
+          uri: http://mockserver:1080
+          predicates:
+            - Path=/api/{version}/mockserver/**, /api/mockserver/**
+          filters:
+            - RewritePath=/api/v1/mockserver/(?<path>.*), /$\{path}
+
+        - id: policy
+          uri: lb://platform-policy
+          predicates:
+            - Path=/api/{version}/abac/**, /api/abac/**
+          filters:
+            - RewritePath=/api/abac/actuator/(?<path>.*), /actuator/$\{path}
+            - RewritePath=/api/(?<path>.*), /$\{path}
 
 gateway:
   security:
     enabled: false
+    key-life-time: 15m
+    key-usage-time: 10m
+    inactivity-time: 30m
+    force-single-session: false
+    force-global-logout: false
   services:
     - platform-file
     - platform-forms
@@ -80,6 +122,6 @@ gateway:
     - platform-tree
     - platform-validation
 
-jwt:
-  serviceIds:
-    gateway-application: "bb743523-f390-4a08-834e-9d1c592ccec4"
+ribbon:
+  ConnectTimeout: 1000
+  ReadTimeout: 3000
