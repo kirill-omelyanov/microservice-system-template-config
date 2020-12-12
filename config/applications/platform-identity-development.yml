@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://188.127.226.180:25432/mdm-form?ApplicationName=local-forms-omelyanov
+    url: jdbc:postgresql://188.127.226.180:25432/mdm-identity?ApplicationName=local-identity-omelyanov
     username: postgres
     password: AceTate1221!
     hikari:
@@ -10,8 +10,3 @@ spring:
       maximum-pool-size: 10
       maxLifetime: 600000
 
-
-task:
-  concurrency:
-    import_queue: 3
-    export_queue: 3

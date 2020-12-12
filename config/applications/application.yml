@@ -27,6 +27,10 @@ spring:
 jwt:
   serviceIds:
     gateway-application: "bb743523-f390-4a08-834e-9d1c592ccec4"
+    platform-tree: "84ac8273-39c7-4b4c-becf-36280ba4a545"
+    platform-mdm: "efe3ea77-288d-40cb-a608-8e17c7758207"
+    platform-forms: "7bf0a3fe-8b89-4802-9bc4-8494b05fab53"
+    soarse-policy: "922a77de-6ec2-4217-9799-a38e6a950939"
 
 management:
   endpoints:

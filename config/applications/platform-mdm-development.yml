@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://188.127.226.180:25432/mdm?ApplicationName=local-mdm-omelyanov
+    username: mdm
+    password: ggF6VMWY
+    hikari:
+      schema: "public"
+      minimum-idle: 2
+      maximum-pool-size: 10
+      maxLifetime: 600000
+
+  main:
+    allow-bean-definition-overriding: true
+  jooq:
+    sql-dialect: Postgres
+
+server:
+  port: 8081
+
+element:
+  versioning:
+    manual-control: false
+    insert-version: true
+    minimum-date: 1900-01-01T00:00:00+03:00
+    maximum-date: 2100-01-01T00:00:00+03:00
+    time-gap: true
+    on-delete: NONE
+    on-insert: START_NOW_ALWAYS
+    override: true
+    merge: true

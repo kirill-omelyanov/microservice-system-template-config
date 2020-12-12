@@ -12,19 +12,7 @@ spring:
           log-request: false
           read-request-data: true
           read-response-data: false
-      routes:
-        - id: price
-          uri: lb://price-service
-          predicates:
-            - Path=/api/price/**
-          filters:
-            - name: RequestRateLimiter
-              args:
-                key-resolver: '#{@customKeyResolver}'
-                redis-rate-limiter.replenishRate: 40
-                redis-rate-limiter.burstCapacity: 100
-            - RewritePath=/api/(?<price>.*), /$\{price}
-
+      routes:      
         - id: tree
           uri: lb://platform-tree
           predicates:
