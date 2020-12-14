@@ -85,7 +85,7 @@ spring:
             - RewritePath=/api/v1/mockserver/(?<path>.*), /$\{path}
 
         - id: policy
-          uri: lb://soarse-policy
+          uri: lb://platform-policy
           predicates:
             - Path=/api/{version}/abac/**, /api/abac/**
           filters:
