@@ -94,7 +94,7 @@ spring:
 
 gateway:
   security:
-    enabled: false
+    enabled: true
     key-life-time: 15m
     key-usage-time: 10m
     inactivity-time: 30m
