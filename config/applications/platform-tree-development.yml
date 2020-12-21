@@ -1,10 +1,25 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://188.127.226.180:15432/mdm-tree?ApplicationName=local-tree-omelyanov
+    url: jdbc:postgresql://188.127.226.180:25432/mdm-tree?ApplicationName=local-tree-omelyanov
     username: postgres
     password: AceTate1221!
     hikari:
       schema: "public"
       minimum-idle: 2
       maximum-pool-size: 10
+      maxLifetime: 600000
+
+
+tree:
+  query-batch-size: 100
+  modules:
+    - serviceId: platform-mdm
+      name: mdm
+      types:
+        - key: element
+        - key: classifier
+
+abac:
+  metadata:
+    jooqPackage: com.soarse.policy.model.jooq.tables.pojos
