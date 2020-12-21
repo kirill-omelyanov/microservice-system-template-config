@@ -22,4 +22,4 @@ tree:
 
 abac:
   metadata:
-    jooqPackage: com.soarse.policy.model.jooq.tables.pojos
+    jooqPackage: com.soarse.tree.model
