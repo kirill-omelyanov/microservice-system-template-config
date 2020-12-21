@@ -23,6 +23,5 @@ tree:
 abac:
   metadata:
     jooqPackage: com.soarse.tree.model
-  excludePatterns:
-    - "*.jooq.*"
+  excludePatterns: "com.soarse.tree.model.jooq.*"
     
